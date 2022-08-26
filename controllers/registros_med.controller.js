@@ -23,7 +23,7 @@ export const getregistrosmedicos = async (req, res) => {
 export const createmedico = async (req, res) => {
     
     try {
-        const {id,name,lastname,email,password,especialidad,num_colegio,phone,direccion,preciop,precioo,puntuacion,comentarios} = req.body;
+        const {id,name,lastname,email,password,especialidad} = req.body;
         const newmedico= await medico.create({
             id:id,
             name:name,
@@ -31,13 +31,13 @@ export const createmedico = async (req, res) => {
             email:email,
             password:password,
             especialidad:especialidad,
-            num_colegio:num_colegio,
-            phone:phone,
-            direccion:direccion,
-            preciop:preciop,
-            precioo:precioo,
-            puntuacion:puntuacion,
-            comentarios:comentarios
+            // num_colegio:num_colegio,
+            // phone:phone,
+            // direccion:direccion,
+            // preciop:preciop,
+            // precioo:precioo,
+            // puntuacion:puntuacion,
+            // comentarios:comentarios
         })
 
         //console.log(newProject);
@@ -77,7 +77,7 @@ export const updatemedico = async (req,res) => {
 export const getmedicoatencion = async (req, res) => {
     try {
         const {id} = req.params;
-        const atencion = await atencion.findAll({
+        const atencion = await Atencion.findAll({
             where : {
                 registro_medico_id : id
             }
