@@ -2,10 +2,11 @@ import { DataTypes } from "sequelize";
 import {sequelize} from "../database/database.js";
 import { Atencion } from "./atencion.js";
 
-export const medico = sequelize.define('medico' , {
+export const Medico = sequelize.define('Medicos' , {
     id : {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement:true
     },
     name : {
         type: DataTypes.STRING
@@ -47,12 +48,12 @@ export const medico = sequelize.define('medico' , {
     timestamps: true
 }); 
 
-medico.hasMany(Atencion, {
+Medico.hasMany(Atencion, {
     foreignKey: 'medico_id',
     sourceKey: 'id'
 })
 
-Atencion.belongsTo(medico, {
+Atencion.belongsTo(Medico, {
     foreignKey: 'medico_id',
     targetId: 'id'
 })

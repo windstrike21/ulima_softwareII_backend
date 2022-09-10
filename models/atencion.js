@@ -5,7 +5,7 @@ export const Atencion = sequelize.define('Atencions', {
     id: {
        type: DataTypes.INTEGER,
        primaryKey: true,
-
+       autoIncrement:true
     },
     fecha: {
         type: DataTypes.DATE

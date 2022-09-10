@@ -1,7 +1,7 @@
-import { medico } from "../models/medico.js";
+import { Medico } from "../models/medico.js";
 import { Atencion } from "../models/atencion.js";
 
-export const getregistrosmedicos = async (req, res) => {
+export const getMedicos = async (req, res) => {
 
     try {
         //el throw de abajo es para probar si el try catch funciona
@@ -9,9 +9,9 @@ export const getregistrosmedicos = async (req, res) => {
         // el servidor responda que error es y que el servidor no se detenga y pueda seguir
         // realizando sus funciones en otros endpoints y hacien peticiones
         //throw new Error('query failed')
-        const registrosmedicos = await medico.findAll();
+        const Medicos = await Medico.findAll();
         //console.log(projects)
-        res.json(registrosmedicos);
+        res.json(Medicos); 
     } catch (error) {
         return res.status(500).json({message : error.message});
     }
@@ -20,12 +20,11 @@ export const getregistrosmedicos = async (req, res) => {
 
 
 
-export const createmedico = async (req, res) => {
+export const createMedico = async (req, res) => {
     
     try {
-        const {id,name,lastname,email,password,especialidad} = req.body;
-        const newmedico= await medico.create({
-            id:id,
+        const {name,lastname,email,password,especialidad} = req.body;
+        const newmedico= await Medico.create({
             name:name,
             lastname:lastname,
             email:email,
@@ -51,7 +50,7 @@ export const createmedico = async (req, res) => {
     
 }
 
-export const updatemedico = async (req,res) => {
+export const updateMedico = async (req,res) => {
     
     try {
         const {id} = req.params;
@@ -60,13 +59,13 @@ export const updatemedico = async (req,res) => {
         //console.log(id);
         //console.log(req.body);
         //res.send('updating projects');
-        const registrod= await medico.findByPk(id);
+        const registrod= await Medico.findByPk(id);
         registrod.email = email;
         registrod.phone = phone;
         registrod.preciop = preciop;
         registrod.precioo = precioo;
         //para guardar las modificaciones al objeto en la base de datos
-        await project.save();
+        await Medico.save();
         res.json({message: "Datos actualizados"});
     } catch (error) {
        return res.status(500).json({message: error.message}); 
@@ -74,16 +73,16 @@ export const updatemedico = async (req,res) => {
     
 }
 
-export const getmedicoatencion = async (req, res) => {
+export const getAtencionsMedico = async (req, res) => {
     try {
         const {id} = req.params;
-        const atencion = await Atencion.findAll({
+        const atencions = await Atencion.findAll({
             where : {
                 registro_medico_id : id
             }
         })
         
-        res.json(atencion);
+        res.json(atencions);
     } catch (error) {
         return res.status(500).json({message : error.message})
     }
