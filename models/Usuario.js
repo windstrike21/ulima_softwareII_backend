@@ -7,6 +7,7 @@ export const Usuario = sequelize.define('Usuarios' , {
         primaryKey: true,
         autoIncrement:true
     },
+    
     fecha_emision : {
         type: DataTypes.STRING
     },
@@ -50,6 +51,35 @@ export const Usuario = sequelize.define('Usuarios' , {
         type: DataTypes.STRING
     },
     fallecido_madre : {
+        type: DataTypes.STRING
+    },
+
+    
+    departamento : {
+        type: DataTypes.STRING
+    },
+    provincia : {
+        type: DataTypes.STRING
+    },
+    distrito : {
+        type: DataTypes.STRING
+    },
+    direccion : {
+        type: DataTypes.STRING
+    },
+    localidad : {
+        type: DataTypes.STRING
+    },
+    sector : {
+        type: DataTypes.STRING
+    },
+    referencia : {
+        type: DataTypes.STRING
+    },
+    num_telefono : {
+        type: DataTypes.STRING
+    },
+    num_celular : {
         type: DataTypes.STRING
     },
     tipo : {
