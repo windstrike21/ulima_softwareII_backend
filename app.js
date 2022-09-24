@@ -2,6 +2,7 @@ import express from 'express';
 //import registrosPacRoutes from './routes/registros_pac.routes.js'
 import registrosMedRoutes from './routes/registros_med.routes.js'
 import Usuario from './routes/Usuario.js'
+import Cita from './routes/Cita.js'
 //import registrosAtencionRoutes from './routes/registros_atencion.routes.js'
 import cors from "cors";
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 //app.use(registrosPacRoutes)
 app.use(Usuario)
+app.use(Cita)
 //app.use(registrosAtencionRoutes)
 
 export default app;

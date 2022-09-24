@@ -1,3 +1,4 @@
+import { Cita } from "../models/Cita.js";
 import { Usuario } from "../models/Usuario.js";
 
 export const createUsuario = async (req, res) => {
@@ -111,4 +112,19 @@ export const getUsuarioTipoNombre = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 
+}
+export const getCitasPaciente = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const citas = await Cita.findAll({
+            where : {
+                paciente_id:id
+            }
+        })
+        
+        res.json(citas);
+    } catch (error) {
+        return res.status(500).json({message : error.message})
+    }
+    
 }

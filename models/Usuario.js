@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import {sequelize} from "../database/database.js";
+import { Cita } from "./Cita.js";
 
 export const Usuario = sequelize.define('Usuarios' , {
     id : {
@@ -90,3 +91,13 @@ export const Usuario = sequelize.define('Usuarios' , {
     //esto sirve para quitar las tablas de createdAt y updatedAt
     timestamps: true
 }); 
+
+Usuario.hasMany(Cita, {
+    foreignKey: 'paciente_id',
+    sourceKey: 'id'
+})
+
+Cita.belongsTo(Usuario, {
+    foreignKey: 'paciente_id',
+    targetId: 'id'
+})
