@@ -1,96 +1,106 @@
 import { DataTypes } from "sequelize";
-import {sequelize} from "../database/database.js";
+import { sequelize } from "../database/database.js";
 import { Cita } from "./Cita.js";
 
-export const Usuario = sequelize.define('Usuarios' , {
-    id : {
+export const Usuario = sequelize.define('Usuarios', {
+
+    // Común para todos
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement:true
-    },
-    
-    fecha_emision : {
+        autoIncrement: true
+    },         
+    nombres: {
         type: DataTypes.STRING
     },
-    edad : {
+    apellidos: {
+        type: DataTypes.STRING
+    },    
+    fecha_nacimiento: {
+        type: DataTypes.STRING
+    },
+    edad: {
+        type: DataTypes.INTEGER
+    },   
+    genero: {
+        type: DataTypes.STRING
+    },
+    email: {
+        type: DataTypes.STRING
+    },
+    celular: {
         type: DataTypes.INTEGER
     },
-    email : {
+    num_telefono: {
         type: DataTypes.STRING
     },
-    celular : {
-        type: DataTypes.INTEGER
-    },
-    apellidos : {
+    num_celular: {
         type: DataTypes.STRING
     },
-    nombres : {
-        type: DataTypes.STRING
-    },
-    fecha_nacimiento : {
-        type: DataTypes.STRING
-    },
-    estado_civil : {
-        type: DataTypes.STRING
-    },
-    nombre_padre : {
-        type: DataTypes.STRING
-    },
-    nombre_madre : {
-        type: DataTypes.STRING
-    },
-    num_hist_cli : {
-        type: DataTypes.INTEGER
-    },
-    sexo : {
-        type: DataTypes.STRING
-    },
-    tipo_seguro : {
-        type: DataTypes.STRING
-    },
-    fallecido_padre : {
-        type: DataTypes.STRING
-    },
-    fallecido_madre : {
+    tipo: { //tipo de usuario
         type: DataTypes.STRING
     },
 
-    
-    departamento : {
+    // Médico
+
+
+    // Paciente
+    fecha_emision: {
         type: DataTypes.STRING
     },
-    provincia : {
+    tipo_seguro: {
         type: DataTypes.STRING
     },
-    distrito : {
+    fallecido_padre: {
         type: DataTypes.STRING
     },
-    direccion : {
+    fallecido_madre: {
         type: DataTypes.STRING
     },
-    localidad : {
+    estado_civil: {
         type: DataTypes.STRING
     },
-    sector : {
+    nombre_padre: {
         type: DataTypes.STRING
     },
-    referencia : {
+    nombre_madre: {
         type: DataTypes.STRING
     },
-    num_telefono : {
+    num_hist_cli: {
+        type: DataTypes.INTEGER
+    },
+    departamento: {
         type: DataTypes.STRING
     },
-    num_celular : {
+    provincia: {
         type: DataTypes.STRING
     },
-    tipo : {
-        type:DataTypes.STRING
-    }
- 
-},{
+    distrito: {
+        type: DataTypes.STRING
+    },
+    direccion: {
+        type: DataTypes.STRING
+    },
+    localidad: {
+        type: DataTypes.STRING
+    },
+    sector: {
+        type: DataTypes.STRING
+    },
+    referencia: {
+        type: DataTypes.STRING
+    },
+
+    // Personal
+
+
+    // Administrador
+
+
+}, {
     //esto sirve para quitar las tablas de createdAt y updatedAt
     timestamps: true
-}); 
+});
 
 Usuario.hasMany(Cita, {
     foreignKey: 'paciente_id',
