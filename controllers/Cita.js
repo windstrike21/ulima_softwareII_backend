@@ -18,7 +18,35 @@ export const createCita = async (req, res) => {
         
     } catch (error) {
         return res.status(500).json({message : error.message});
+    }    
+    
+}
+
+export const getCita = async (req, res) => {
+
+    try {
+        const Usuarios = await Cita.findAll();
+        res.json(Cita);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
     }
-    
-    
+
+}
+
+export const updateCita = async (req, res) => {
+
+    try {
+
+        let prop;
+        const cita = await Cita.findByPk(req.params.id);
+        for (prop in req.body) {
+            cita[prop] = req.body[prop]
+        }
+
+        await cita.save();
+        res.json({ message: "Datos actualizados" });
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+
 }
