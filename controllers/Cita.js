@@ -25,7 +25,7 @@ export const createCita = async (req, res) => {
 export const getCita = async (req, res) => {
 
     try {
-        const Usuarios = await Cita.findAll();
+        const Cita = await Cita.findAll();
         res.json(Cita);
     } catch (error) {
         return res.status(500).json({ message: error.message });
