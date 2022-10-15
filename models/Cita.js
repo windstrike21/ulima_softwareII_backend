@@ -20,7 +20,9 @@ export const Cita = sequelize.define('Citas' , {
     doctor : {
         type: DataTypes.STRING
     },
- 
+    diagnostico : {
+        type: DataTypes.STRING
+    }
 },{
     //esto sirve para quitar las tablas de createdAt y updatedAt
     timestamps: true

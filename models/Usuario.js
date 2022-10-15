@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
 import { Cita } from "./Cita.js";
+import { Consulta } from "./Consulta.js";
 
 export const Usuario = sequelize.define('Usuarios', {
 
@@ -22,7 +23,7 @@ export const Usuario = sequelize.define('Usuarios', {
     edad: {
         type: DataTypes.INTEGER
     },   
-    genero: {
+    sexo: {
         type: DataTypes.STRING
     },
     email: {
@@ -111,3 +112,36 @@ Cita.belongsTo(Usuario, {
     foreignKey: 'paciente_id',
     targetId: 'id'
 })
+
+//  Usuario.belongsToMany(Usuario,{
+//      as: "usuario1",
+//      through:Consulta,
+//      foreignKey: 'id_usuario',
+//      sourceKey: 'id'
+//  })
+//  Usuario.belongsToMany(Usuario,{
+//      as: "usuario2",
+//      through:Consulta,
+//      foreignKey: 'id_usuario2',
+//      sourceKey: 'id'
+//  })
+
+
+// Usuario.hasMany(Consulta, {
+//     foreignKey: 'id_usuario',
+//     sourceKey: 'id'
+// })
+
+// Consulta.belongsTo(Usuario, {
+//     foreignKey: 'id_usuario',
+//     targetId: 'id'
+// })
+// Usuario.hasMany(Consulta, {
+//     foreignKey: 'id_usuario2',
+//     sourceKey: 'id'
+// })
+
+// Consulta.belongsTo(Usuario, {
+//     foreignKey: 'id_usuario2',
+//     targetId: 'id'
+// })

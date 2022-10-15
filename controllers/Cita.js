@@ -22,11 +22,11 @@ export const createCita = async (req, res) => {
     
 }
 
-export const getCita = async (req, res) => {
+export const getCitas = async (req, res) => {
 
     try {
-        const Cita = await Cita.findAll();
-        res.json(Cita);
+        const Citas = await Cita.findAll();
+        res.json(Citas);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }

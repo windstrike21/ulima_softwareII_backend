@@ -14,6 +14,7 @@ async function main() {
         //await sequelize.authenticate();
         //la función sync() sirve para crear los modelos en la base de datos
         //pero para que los reconozca es necesario importar el modelo
+        //force:false
         await sequelize.sync({force: false});
         console.log("Coneccion establecida con exito");
         var PORT = process.env.PORT || 5000;
