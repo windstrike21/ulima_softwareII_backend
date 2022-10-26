@@ -7,10 +7,18 @@ export const Tarjeta = sequelize.define('Tarjeta', {
     type: DataTypes.INTEGER,
     }, 
 
-    numcad:{
+    numcard:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement:true
+    },
+
+    procesador:{
+        type:DataTypes.STRING
+    },
+
+    banco:{
+        type:DataTypes.STRING
     },
 
     cvv:{
@@ -20,7 +28,6 @@ export const Tarjeta = sequelize.define('Tarjeta', {
     nombre:{
         type:DataTypes.STRING
     },
-
 
 });
 
