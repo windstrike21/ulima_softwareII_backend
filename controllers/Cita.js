@@ -3,13 +3,15 @@ import { Cita } from "../models/Cita.js";
 export const createCita = async (req, res) => {
     
     try {
-        const {paciente_id,fecha,especialidad,hora,doctor} = req.body;
+        const {id_Paciente,id_Medico,fecha,especialidad,hora,doctor,diagnostico} = req.body;
         const newcita= await Cita.create({
-            paciente_id:paciente_id,
+            id_Paciente:id_Paciente,
+            id_Medico:id_Medico,
             fecha:fecha,
             especialidad:especialidad,
             hora:hora,
-            doctor:doctor
+            doctor:doctor,
+            diagnostico:diagnostico
         })
 
         //console.log(newProject);

@@ -1,30 +1,41 @@
 import { DataTypes } from "sequelize";
-import {sequelize} from "../database/database.js";
+import { sequelize } from "../database/database.js";
 import { Atencion } from "./atencion.js";
+import { CitaMedicamento } from "./CitaMedicamento.js";
+import { Medicamento } from "./Medicamento.js";
 
-export const Cita = sequelize.define('Citas' , {
-    id : {
+export const Cita = sequelize.define('Citas', {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement:true
+        autoIncrement: true
     },
-    fecha : {
+    fecha: {
         type: DataTypes.STRING
     },
-    especialidad : {
+    especialidad: {
         type: DataTypes.STRING
     },
-    hora : {
+    hora: {
         type: DataTypes.STRING
     },
-    doctor : {
+    doctor: {
         type: DataTypes.STRING
     },
-    diagnostico : {
+    diagnostico: {
         type: DataTypes.STRING
+    },
+    id_Paciente:{
+        type:DataTypes.INTEGER
+    },
+    id_Medico:{
+        type:DataTypes.INTEGER
     }
-},{
+}, {
     //esto sirve para quitar las tablas de createdAt y updatedAt
     timestamps: true
-}); 
+});
 
+
+Cita.belongsToMany(Medicamento, { through: CitaMedicamento });
+Medicamento.belongsToMany(Cita, { through: CitaMedicamento });

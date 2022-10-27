@@ -10,19 +10,19 @@ export const Usuario = sequelize.define('Usuarios', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
-    },         
+    },
     nombres: {
         type: DataTypes.STRING
     },
     apellidos: {
         type: DataTypes.STRING
-    },    
+    },
     fecha_nacimiento: {
         type: DataTypes.STRING
     },
     edad: {
         type: DataTypes.INTEGER
-    },   
+    },
     sexo: {
         type: DataTypes.STRING
     },
@@ -103,15 +103,15 @@ export const Usuario = sequelize.define('Usuarios', {
     timestamps: true
 });
 
-Usuario.hasMany(Cita, {
-    foreignKey: 'paciente_id',
-    sourceKey: 'id'
-})
+// Usuario.hasMany(Cita, {
+//     foreignKey: 'paciente_id',
+//     sourceKey: 'id'
+// })
 
-Cita.belongsTo(Usuario, {
-    foreignKey: 'paciente_id',
-    targetId: 'id'
-})
+// Cita.belongsTo(Usuario, {
+//     foreignKey: 'paciente_id',
+//     targetId: 'id'
+// })
 
 //  Usuario.belongsToMany(Usuario,{
 //      as: "usuario1",
