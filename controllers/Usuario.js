@@ -157,5 +157,5 @@ export const getCitas = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
-
+    
 }
