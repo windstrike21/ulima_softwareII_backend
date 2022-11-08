@@ -142,7 +142,10 @@ export const getCitas = async (req, res) => {
             citas = await Cita.findAll({
                 where: {
                     id_Paciente: id
-                }
+                },
+                order:[
+                    ['fecha','ASC']
+                ]
             })
         } else if(tipo == "Medico"){
             citas = await Cita.findAll({

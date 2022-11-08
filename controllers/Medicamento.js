@@ -1,25 +1,18 @@
 
+import { Cita } from "../models/Cita.js";
 import { CitaMedicamento } from "../models/CitaMedicamento.js";
 import { Medicamento } from "../models/Medicamento.js";
 
 export const createMedicamento = async (req, res) => {
 
     try {
-        const { medicamento, frecuencia, duracion, unidades,disponibilidad,precio_unitario, CitaId } = req.body;
+        const { nombre, disponibilidad,precio_unitario } = req.body;
 
         const newmedicamento = await Medicamento.create({
-            medicamento: medicamento,
-            frecuencia: frecuencia,
-            duracion: duracion,
-            unidades: unidades,
+            nombre: nombre,
             disponibilidad:disponibilidad,
             precio_unitario:precio_unitario
         })
-        await CitaMedicamento.create({
-            CitaId: CitaId,
-            MedicamentoId: newmedicamento.id
-        })
-
         //console.log(newProject);
         //res.send('creating projects');
         res.json(newmedicamento);
@@ -46,6 +39,30 @@ export const getMedicamentos = async (req, res) => {
     }
 
 }
+export const createCitaMedicamento = async (req, res) => {
+
+    try {
+        const { nombre, frecuencia, duracion, unidades, CitaId } = req.body;
+
+        const newCitaMedicamento = await CitaMedicamento.create({
+            CitaId:CitaId,
+            nombre: nombre,
+            frecuencia: frecuencia,
+            duracion: duracion,
+            unidades: unidades
+        })
+       
+
+        //console.log(newProject);
+        //res.send('creating projects');
+        res.json(newCitaMedicamento);
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+
+
+}
 export const getCitaMedicamento = async (req, res) => {
 
     try {
@@ -62,6 +79,7 @@ export const getCitaMedicamento = async (req, res) => {
     }
 
 }
+
 export const getMedicamentosCita = async (req, res) => {
 
     try {
@@ -72,24 +90,18 @@ export const getMedicamentosCita = async (req, res) => {
         //throw new Error('query failed')
         const {id}=req.params
         
-        let medicamentos=[]
-        const citaMedicamentos = await CitaMedicamento.findAll({
+        
+        
+        const medRecetados= await Cita.findAll({
+            include:Medicamento,
+            attributes: [],
             where:{
-                CitaId:id
-            }
-        })
-        const cantidadCitaMedicamentos = await CitaMedicamento.count({
-            where:{
-                CitaId:id
+                id:id
             }
         })
         
-        for(let i=0;i<cantidadCitaMedicamentos;i++){
-           const medicamento=await Medicamento.findByPk(citaMedicamentos[i].MedicamentoId);
-           medicamentos.push(medicamento)
-        }
         //console.log(projects)
-        res.json(medicamentos);
+        res.json(medRecetados);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }

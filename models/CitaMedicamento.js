@@ -8,7 +8,16 @@ export const CitaMedicamento = sequelize.define('cita_medicamento', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
-    }
+    },
+    frecuencia:{
+        type:DataTypes.STRING
+    },
+    duracion:{
+        type:DataTypes.STRING
+    },
+    unidades:{
+        type:DataTypes.INTEGER
+    },
 
 }, {
     //esto sirve para quitar las tablas de createdAt y updatedAt

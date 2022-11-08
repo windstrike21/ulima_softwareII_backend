@@ -11,7 +11,7 @@ export const Cita = sequelize.define('Citas', {
         autoIncrement: true
     },
     fecha: {
-        type: DataTypes.STRING
+        type: DataTypes.DATEONLY
     },
     especialidad: {
         type: DataTypes.STRING
@@ -25,11 +25,11 @@ export const Cita = sequelize.define('Citas', {
     diagnostico: {
         type: DataTypes.STRING
     },
-    id_Paciente:{
-        type:DataTypes.INTEGER
+    id_Paciente: {
+        type: DataTypes.INTEGER
     },
-    id_Medico:{
-        type:DataTypes.INTEGER
+    id_Medico: {
+        type: DataTypes.INTEGER
     }
 }, {
     //esto sirve para quitar las tablas de createdAt y updatedAt
@@ -37,5 +37,18 @@ export const Cita = sequelize.define('Citas', {
 });
 
 
-Cita.belongsToMany(Medicamento, { through: CitaMedicamento });
-Medicamento.belongsToMany(Cita, { through: CitaMedicamento });
+// Cita.belongsToMany(Medicamento, { through: CitaMedicamento });
+// Medicamento.belongsToMany(Cita, { through: CitaMedicamento });
+
+Cita.belongsToMany(Medicamento, {
+    
+    through: CitaMedicamento,
+    foreignKey: 'CitaId',
+    sourceKey: 'id'
+})
+Medicamento.belongsToMany(Cita, {
+    
+    through: CitaMedicamento,
+    foreignKey: 'nombre',
+    sourceKey: 'nombre'
+})

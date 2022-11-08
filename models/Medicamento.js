@@ -10,17 +10,9 @@ export const Medicamento = sequelize.define('Medicamentos', {
         primaryKey: true,
         autoIncrement: true
     },         
-    medicamento:{
-        type:DataTypes.STRING
-    },
-    frecuencia:{
-        type:DataTypes.STRING
-    },
-    duracion:{
-        type:DataTypes.STRING
-    },
-    unidades:{
-        type:DataTypes.INTEGER
+    nombre:{
+        type:DataTypes.STRING,
+        primaryKey:true
     },
     disponibilidad:{
         type:DataTypes.BOOLEAN
