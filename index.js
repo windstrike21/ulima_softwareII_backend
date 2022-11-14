@@ -7,7 +7,7 @@ import {sequelize} from "./database/database.js"
 //import "./models/paciente.js";
 import "./models/medico.js";
 //import "./models/atencion.js";
-//import { CitaMedicamento } from "./models/CitaMedicamento.js";
+//import { Medicamento } from "./models/Medicamento.js";
 
 async function main() {
 
@@ -17,7 +17,7 @@ async function main() {
         //pero para que los reconozca es necesario importar el modelo
         //force:false
         await sequelize.sync({force: false});
-        // await CitaMedicamento.sync({force:true})
+        // await Medicamento.sync({force:true})
         console.log("Coneccion establecida con exito");
         var PORT = process.env.PORT || 5000;
         app.listen(PORT);

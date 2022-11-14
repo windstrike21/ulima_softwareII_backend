@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { Cita } from "../models/Cita.js";
 import { Usuario } from "../models/Usuario.js";
 
@@ -96,7 +97,9 @@ export const getUsuarioTipoNombre = async (req, res) => {
         const usuarioTipo = await Usuario.findAll({
             where: {
                 tipo: tipo,
-                nombres: nombre
+                nombre: {
+                    [Op.like]:`${nombre}%`
+                }
             }
         })
 

@@ -2,96 +2,54 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
 import { Cita } from "./Cita.js";
 import { Consulta } from "./Consulta.js";
+import { HojaFiliacion } from "./HojaFiliacion.js";
 
 export const Usuario = sequelize.define('Usuarios', {
 
     // Común para todos
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+    id:{
+        type:DataTypes.INTEGER,
+        primaryKey: true
     },
-    nombres: {
-        type: DataTypes.STRING
+    nombre:{
+        type:DataTypes.STRING
     },
-    apellidos: {
-        type: DataTypes.STRING
-    },
-    fecha_nacimiento: {
+    fecha_emision: {
         type: DataTypes.STRING
     },
     edad: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING
     },
     sexo: {
         type: DataTypes.STRING
     },
     email: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        unique: true
+
+    },
+    password:{
+        type:DataTypes.STRING,
+        unique: true
+
     },
     celular: {
-        type: DataTypes.INTEGER
-    },
-    num_telefono: {
-        type: DataTypes.STRING
-    },
-    num_celular: {
-        type: DataTypes.STRING
-    },
+        type: DataTypes.INTEGER,
+        unique: true
+
+    },  
     tipo: { //tipo de usuario
         type: DataTypes.STRING
     },
 
     // Médico
-
+    especialidad:{
+        type:DataTypes.STRING
+    }
 
     // Paciente
-    fecha_emision: {
-        type: DataTypes.STRING
-    },
-    tipo_seguro: {
-        type: DataTypes.STRING
-    },
-    fallecido_padre: {
-        type: DataTypes.STRING
-    },
-    fallecido_madre: {
-        type: DataTypes.STRING
-    },
-    estado_civil: {
-        type: DataTypes.STRING
-    },
-    nombre_padre: {
-        type: DataTypes.STRING
-    },
-    nombre_madre: {
-        type: DataTypes.STRING
-    },
-    num_hist_cli: {
-        type: DataTypes.INTEGER
-    },
-    departamento: {
-        type: DataTypes.STRING
-    },
-    provincia: {
-        type: DataTypes.STRING
-    },
-    distrito: {
-        type: DataTypes.STRING
-    },
-    direccion: {
-        type: DataTypes.STRING
-    },
-    localidad: {
-        type: DataTypes.STRING
-    },
-    sector: {
-        type: DataTypes.STRING
-    },
-    referencia: {
-        type: DataTypes.STRING
-    },
 
+    
     // Personal
 
 
@@ -103,6 +61,15 @@ export const Usuario = sequelize.define('Usuarios', {
     timestamps: true
 });
 
+ Usuario.hasOne(HojaFiliacion,{
+     foreignKey: 'num_documento',
+     sourceKey: 'id'
+ })
+ HojaFiliacion.belongsTo(Usuario,{
+     foreignKey: 'num_documento',
+     targetId: 'id'
+ })
+ 
 // Usuario.hasMany(Cita, {
 //     foreignKey: 'paciente_id',
 //     sourceKey: 'id'

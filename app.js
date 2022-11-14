@@ -5,6 +5,7 @@ import Usuario from './routes/Usuario.js'
 import Cita from './routes/Cita.js'
 import Consulta from './routes/Consulta.js'
 import Medicamento from './routes/Medicamento.js'
+import HojaFiliacion from './routes/HojaFiliacion.js'
 //import registrosAtencionRoutes from './routes/registros_atencion.routes.js'
 import cors from "cors";
 
@@ -18,6 +19,7 @@ app.use(Usuario)
 app.use(Cita)
 app.use(Consulta)
 app.use(Medicamento)
+app.use(HojaFiliacion)
 
 //app.use(registrosAtencionRoutes)
 
