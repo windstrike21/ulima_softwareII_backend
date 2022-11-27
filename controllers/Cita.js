@@ -1,4 +1,5 @@
 import { Cita } from "../models/Cita.js";
+import { CitaMedicamento } from "../models/CitaMedicamento.js";
 
 export const createCita = async (req, res) => {
     
@@ -50,4 +51,52 @@ export const updateCita = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 
+}
+export const getCitasMedicamentos = async (req, res) => {
+
+    try {
+        const citasMedicamentos = await CitaMedicamento.findAll();
+        res.json(citasMedicamentos);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
+export const getCitaUsuarios = async (req, res) => {
+
+    try {
+        const {idPaciente,idMedico}=req.body
+        const Cita = await Cita.findAll({
+            where:{
+                id_Paciente:idPaciente,
+                id_Medico:idMedico
+            }
+        });
+        res.json(Cita);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+export const createCitaMedicamento = async (req, res) => {
+    
+    try {
+        const {CitaId,nombre,frecuencia,duracion,unidades} = req.body;
+
+        const newCitaMedicamento = await CitaMedicamento.create({
+            CitaId:CitaId,
+            nombre:nombre,
+            frecuencia:frecuencia,
+            duracion:duracion,
+            unidades:unidades
+        })
+        
+
+        //console.log(newProject);
+        //res.send('creating projects');
+        res.json(newCitaMedicamento);
+        
+    } catch (error) {
+        return res.status(500).json({message : error.message});
+    }    
+    
 }

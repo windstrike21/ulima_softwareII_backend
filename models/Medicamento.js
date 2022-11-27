@@ -20,3 +20,4 @@ export const Medicamento = sequelize.define('Medicamentos', {
     //esto sirve para quitar las tablas de createdAt y updatedAt
     timestamps: true
 });
+
