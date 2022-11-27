@@ -1,5 +1,6 @@
 import app from "./app.js";
 import {sequelize} from "./database/database.js"
+
 //estos import sirven para crear las tablas en base a modelos
 //cuando la base de datos esta vacia
 //import "./models/Project.js";
@@ -7,7 +8,7 @@ import {sequelize} from "./database/database.js"
 //import "./models/paciente.js";
 import "./models/medico.js";
 //import "./models/atencion.js";
-//import { Medicamento } from "./models/Medicamento.js";
+//import { Consulta } from "./models/Consulta.js";
 
 async function main() {
 
@@ -17,7 +18,7 @@ async function main() {
         //pero para que los reconozca es necesario importar el modelo
         //force:false
         await sequelize.sync({force: false});
-        // await Medicamento.sync({force:true})
+        // await Consulta.sync({force:true})
         console.log("Coneccion establecida con exito");
         var PORT = process.env.PORT || 5000;
         app.listen(PORT);

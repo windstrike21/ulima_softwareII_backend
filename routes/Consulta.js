@@ -7,6 +7,6 @@ const router = Router();
 router.post('/Consultas', createConsulta);
 router.delete('/Consultas/:id',deleteConsulta);
 router.get('/Consultas',getConsultas)
-router.post('/Consultas/Chat',getConsultasChat)
+router.post('/Consultas/Chat/:id',getConsultasChat)
 
 export default router;

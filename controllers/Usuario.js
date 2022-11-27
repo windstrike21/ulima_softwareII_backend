@@ -1,4 +1,5 @@
 import { Op } from "sequelize";
+
 import { Cita } from "../models/Cita.js";
 import { Usuario } from "../models/Usuario.js";
 
@@ -14,7 +15,7 @@ export const createUsuario = async (req, res) => {
         }
         const newUsuario = await Usuario.create(datosUsuario)
 
-
+        
         //console.log(newProject);
         //res.send('creating projects');
         res.json(newUsuario);
@@ -24,6 +25,16 @@ export const createUsuario = async (req, res) => {
     }
 
 
+}
+export const iniciarSesionUsuario = async(req,res)=>{
+    const {id,password}=req.body
+    const usuario=await Usuario.findOne({
+        where:{
+            id:id,
+            password:password
+        }
+    })
+    res.json(usuario)
 }
 export const updateUsuarioTipo = async (req, res) => {
 
@@ -46,7 +57,24 @@ export const updateUsuarioTipo = async (req, res) => {
     }
 
 }
+export const deleteUsuario = async (req, res) => {
 
+    try {
+        const { id } = req.params;
+        const usuario = await Usuario.destroy({
+            where: {
+                id: id
+            }
+        })
+        //console.log(newProject);
+        //res.send('creating projects');
+        res.json(usuario);
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+
+}
 export const getUsuarios = async (req, res) => {
 
     try {

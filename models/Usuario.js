@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
+
 import { Cita } from "./Cita.js";
 import { Consulta } from "./Consulta.js";
 import { HojaFiliacion } from "./HojaFiliacion.js";
@@ -37,7 +38,7 @@ export const Usuario = sequelize.define('Usuarios', {
         type: DataTypes.INTEGER,
         unique: true
 
-    },  
+    },
     tipo: { //tipo de usuario
         type: DataTypes.STRING
     },
@@ -49,7 +50,7 @@ export const Usuario = sequelize.define('Usuarios', {
 
     // Paciente
 
-    
+
     // Personal
 
 
@@ -61,15 +62,19 @@ export const Usuario = sequelize.define('Usuarios', {
     timestamps: true
 });
 
- Usuario.hasOne(HojaFiliacion,{
+//sequelize.getQueryInterface().removeColumn('Usuarios','sdada')
+
+
+
+Usuario.hasOne(HojaFiliacion,{
      foreignKey: 'num_documento',
      sourceKey: 'id'
- })
- HojaFiliacion.belongsTo(Usuario,{
+})
+HojaFiliacion.belongsTo(Usuario,{
      foreignKey: 'num_documento',
      targetId: 'id'
- })
- 
+})
+
 // Usuario.hasMany(Cita, {
 //     foreignKey: 'paciente_id',
 //     sourceKey: 'id'

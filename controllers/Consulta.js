@@ -2,33 +2,34 @@ import { Op } from "sequelize";
 import { Consulta } from "../models/Consulta.js";
 let numChat = 0;
 
-export const createConsulta = async (req, res) => {
+export const createConsulta = async (consulta) => {
 
     try {
-        const { mensaje, id_usuario, id_usuario2} = req.body;
-        let newConsulta=[];
-        let mensajeEnviado=false;
-        let count1=0;
-        if(id_usuario2 != null){
-            count1=await Consulta.count({
-              where:{
-                id_usuario: {[Op.not]:id_usuario} ,
-                id_usuario2:id_usuario2
-              }
-            })
-        }
         
-        if(count1 == 0){
-           mensajeEnviado=true;
-           newConsulta=await Consulta.create({
-             mensaje: mensaje,
-             id_usuario: id_usuario,
-             id_usuario2:id_usuario2
-           }) 
-        }
+         const { mensaje, id_usuario, id_usuario2} = req.body;
+         let newConsulta=[];
+         let mensajeEnviado=false;
+         let count1=0;
+         if(id_usuario2 != null){
+             count1=await Consulta.count({
+               where:{
+                 id_usuario: {[Op.not]:id_usuario} ,
+                 id_usuario2:id_usuario2
+               }
+             })
+         }
+        
+         if(count1 == 0){
+            mensajeEnviado=true;
+            newConsulta=await Consulta.create({
+              mensaje: mensaje,
+              id_usuario: id_usuario,
+              id_usuario2:id_usuario2
+            }) 
+         }
         
         
-        res.json(mensajeEnviado)
+         res.json(mensajeEnviado)
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -53,7 +54,7 @@ export const deleteConsulta = async (req, res) => {
     }
 
 }
-export const getConsultas = async (req, res) => {
+export const getConsultas = async (req,res) => {
 
     try {
         const consultas = await Consulta.findAll()
@@ -67,38 +68,39 @@ export const getConsultas = async (req, res) => {
 export const getConsultasChat = async (req, res) => {
 
     try {
-        const { id_usuario, id_usuario2} = req.body;
-        let consultas=[]
-        if(id_usuario2 == null){
-            consultas=await Consulta.findAll({
-            where:{
-                [Op.or]: [
-                    { id_usuario:id_usuario,id_usuario2:null },
-                    { id_usuario:{[Op.not]:id_usuario},id_usuario2:id_usuario}///*
-                ]
+        
+         const { id_usuario, id_usuario2} = req.body;
+         let consultas=[]
+         if(id_usuario2 == null){
+             consultas=await Consulta.findAll({
+             where:{
+                 [Op.or]: [
+                     { id_usuario:id_usuario,id_usuario2:null },
+                     { id_usuario:{[Op.not]:id_usuario},id_usuario2:id_usuario}///*
+                 ]
                 
-            }
-           })
-        }else{
-            const count1=await Consulta.count({
-                where:{
-                    id_usuario:{[Op.not]:id_usuario},
-                    id_usuario2:id_usuario2
-                }
+             }
             })
-            if(count1 == 0){
-                consultas=await Consulta.findAll({
-                where:{
-                    [Op.or]: [
-                       { id_usuario:id_usuario,id_usuario2:id_usuario2 },
-                       { id_usuario:id_usuario2,id_usuario2:null }///*
-                    ]
+         }else{
+             const count1=await Consulta.count({
+                 where:{
+                     id_usuario:{[Op.not]:id_usuario},
+                     id_usuario2:id_usuario2
+                 }
+             })
+             if(count1 == 0){
+                 consultas=await Consulta.findAll({
+                 where:{
+                     [Op.or]: [
+                        { id_usuario:id_usuario,id_usuario2:id_usuario2 },
+                        { id_usuario:id_usuario2,id_usuario2:null }///*
+                     ]
                         
-                  }
-                })
-            }
+                   }
+                 })
+             }
             
-        }
+         }
         
         
         res.json(consultas)
@@ -108,18 +110,4 @@ export const getConsultasChat = async (req, res) => {
 
 
 }
-// export const getConsultasChat = async (req, res) => {
-//     try {
-//         const { numChat } = req.params;
-        
-//         const consultasChat =await Consulta.findAll({
-//             where: {
-//                 numChat: numChat
-//             }
-//         })
-//         res.json(consultasChat)
 
-//     } catch (error) {
-//         return res.status(500).json({ message: error.message });
-//     }
-// }
